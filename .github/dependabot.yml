@@ -1,24 +1,102 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
+  # Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/backend"
     schedule:
-      interval: weekly
-    open-pull-requests-limit: 10
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "python"
+    commit-message:
+      prefix: "deps(python)"
     groups:
-      dev-dependencies:
-        dependency-type: development
-      production-dependencies:
-        dependency-type: production
+      python-all:
+        patterns:
+          - "*"
 
-  - package-ecosystem: docker
-    directory: /
+  # npm dependencies — all bundled into one PR per week
+  - package-ecosystem: "npm"
+    directory: "/frontend"
     schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "javascript"
+    commit-message:
+      prefix: "deps(npm)"
+    groups:
+      # React core + DOM + testing-library together
+      react-ecosystem:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "react-icons"
+          - "@testing-library/*"
+        update-types:
+          - "minor"
+          - "patch"
+      # Everything else (axios, web-vitals, etc.) in one PR
+      npm-misc:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "react"
+          - "react-dom"
+          - "react-icons"
+          - "@testing-library/*"
+        update-types:
+          - "minor"
+          - "patch"
 
-  - package-ecosystem: github-actions
-    directory: /
+  # GitHub Actions — all actions in one PR
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 2
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "deps(actions)"
+    groups:
+      github-actions-all:
+        patterns:
+          - "*"
+
+  # Docker dependencies
+  - package-ecosystem: "docker"
+    directory: "/backend"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 2
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "deps(docker)"
+    groups:
+      docker-backend:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "docker"
+    directory: "/frontend"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 2
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "deps(docker)"
+    groups:
+      docker-frontend:
+        patterns:
+          - "*"
