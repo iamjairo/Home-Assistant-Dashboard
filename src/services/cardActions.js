@@ -285,6 +285,42 @@ export const handleAddSelected = (ctx) => {
       return;
     }
 
+    case 'smartplug': {
+      const plugEntities = selectedEntities.filter(
+        (id) => id.startsWith('switch.') || id.startsWith('input_boolean.')
+      );
+      if (plugEntities.length === 0) return;
+      const newSettings = { ...cardSettings };
+      const newCardIds = plugEntities.map((entityId) => {
+        const cardId = `smart_plug_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        const settingsKey = getCardSettingsKey(cardId, addCardTargetPage);
+        newSettings[settingsKey] = { ...(newSettings[settingsKey] || {}), plugId: entityId };
+        return cardId;
+      });
+      persistCardSettings(newSettings);
+      commitCards(newCardIds);
+      setSelectedEntities([]);
+      return;
+    }
+
+    case 'doorbell': {
+      const doorbellEntities = selectedEntities.filter(
+        (id) => id.startsWith('binary_sensor.') || id.startsWith('button.')
+      );
+      if (doorbellEntities.length === 0) return;
+      const newSettings = { ...cardSettings };
+      const newCardIds = doorbellEntities.map((entityId) => {
+        const cardId = `doorbell_card_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        const settingsKey = getCardSettingsKey(cardId, addCardTargetPage);
+        newSettings[settingsKey] = { ...(newSettings[settingsKey] || {}), doorbellSensorId: entityId };
+        return cardId;
+      });
+      persistCardSettings(newSettings);
+      commitCards(newCardIds);
+      setSelectedEntities([]);
+      return;
+    }
+
     // entity / toggle / sensor — default path for plain HA entities
     default: {
       const validSelectedEntities = selectedEntitiesForType();

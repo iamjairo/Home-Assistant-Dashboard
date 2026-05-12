@@ -30,6 +30,7 @@ export function ModalSettingsSlice({
     setShowHeaderEditModal,
     configTab,
     setConfigTab,
+    setShowManagementConsole,
   } = modals;
   const {
     currentTheme,
@@ -140,6 +141,10 @@ export function ModalSettingsSlice({
             onFinishOnboarding={() => {
               setShowOnboarding(false);
               setShowConfigModal(false);
+            }}
+            onOpenManagementConsole={() => {
+              setShowConfigModal(false);
+              setShowManagementConsole?.(true);
             }}
             profiles={profiles}
           />

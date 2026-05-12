@@ -270,7 +270,7 @@ export const PageProvider = ({ children }) => {
   const [dynamicGridColumns, setDynamicGridColumns] = useState(true);
   const [gridGapH, setGridGapH] = useState(20);
   const [gridGapV, setGridGapV] = useState(20);
-  const [cardBorderRadius, setCardBorderRadius] = useState(16);
+  const [cardBorderRadius, setCardBorderRadius] = useState(24);
   const [headerScale, setHeaderScale] = useState(1);
   const [sectionSpacing, setSectionSpacing] = useState(DEFAULT_SECTION_SPACING);
   const [cardsOnlyMode, setCardsOnlyMode] = useState(() => readBoolean(CARDS_ONLY_MODE_KEY, false));

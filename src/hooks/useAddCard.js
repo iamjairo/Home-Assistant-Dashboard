@@ -20,6 +20,7 @@ export function useAddCard({
   isLightsPage = () => false,
   isBatteryPage = () => false,
   isRoomExplorerPage = () => false,
+  isCameraWallPage = () => false,
   pagesConfig,
   persistConfig,
   cardSettings,
@@ -83,7 +84,7 @@ export function useAddCard({
   // ── Infer card type from target page ───────────────────────────────────
   useEffect(() => {
     if (!showAddCardModal) return;
-    if (isMediaPage(addCardTargetPage) || isSonosPage(addCardTargetPage) || isLightsPage(addCardTargetPage) || isBatteryPage(addCardTargetPage) || isRoomExplorerPage(addCardTargetPage)) {
+    if (isMediaPage(addCardTargetPage) || isSonosPage(addCardTargetPage) || isLightsPage(addCardTargetPage) || isBatteryPage(addCardTargetPage) || isRoomExplorerPage(addCardTargetPage) || isCameraWallPage(addCardTargetPage)) {
       setAddCardType('entity');
       return;
     }
@@ -127,6 +128,8 @@ export function useAddCard({
     if (addCardType === 'toggle') return t('addCard.available.toggles');
     if (addCardType === 'sensor') return t('addCard.available.sensors');
     if (addCardType === 'entity') return t('addCard.available.entities');
+    if (addCardType === 'smartplug') return t('addCard.available.smartplugs');
+    if (addCardType === 'doorbell') return t('addCard.available.doorbells');
     return t('addCard.available.lights');
   };
 
@@ -164,7 +167,11 @@ export function useAddCard({
                                 ? 'addCard.item.sensors'
                                 : addCardType === 'entity'
                                   ? 'addCard.item.entities'
-                                  : 'addCard.item.lights';
+                                  : addCardType === 'smartplug'
+                                    ? 'addCard.item.smartplugs'
+                                    : addCardType === 'doorbell'
+                                      ? 'addCard.item.doorbells'
+                                      : 'addCard.item.lights';
 
     return t('addCard.noneLeft').replace('{item}', t(itemKey));
   };

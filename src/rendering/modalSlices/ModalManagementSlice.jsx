@@ -10,6 +10,7 @@ const EditPageModal = lazy(() => import('../../modals/EditPageModal'));
 const MediaModal = lazy(() => import('../../modals/MediaModal'));
 const StatusGroupPillModal = lazy(() => import('../../modals/StatusGroupPillModal'));
 const StatusPillsConfigModal = lazy(() => import('../../modals/StatusPillsConfigModal'));
+const ManagementConsoleModal = lazy(() => import('../../modals/ManagementConsoleModal'));
 
 export function ModalManagementSlice({
   core,
@@ -21,7 +22,7 @@ export function ModalManagementSlice({
   editModalProps,
   mediaTick,
 }) {
-  const { entities, conn, t } = core;
+  const { entities, conn, t, connected, activeUrl } = core;
   const {
     activeMediaModal,
     setActiveMediaModal,
@@ -43,6 +44,8 @@ export function ModalManagementSlice({
     setShowEditCardModal: setEditCardModalVisibility,
     showStatusPillsConfig,
     setShowStatusPillsConfig,
+    showManagementConsole,
+    setShowManagementConsole,
     setEditCardSettingsKey,
   } = modals;
   const {
@@ -59,6 +62,7 @@ export function ModalManagementSlice({
     createLightsPage,
     createBatteryPage,
     createRoomExplorerPage,
+    createCameraWallPage,
     deletePage,
     pageSettings,
     savePageSetting,
@@ -212,6 +216,7 @@ export function ModalManagementSlice({
             onCreateLights={createLightsPage}
             onCreateBattery={createBatteryPage}
             onCreateRoomExplorer={createRoomExplorerPage}
+            onCreateCameraWall={createCameraWallPage}
           />
         </ModalSuspense>
       )}
@@ -296,6 +301,19 @@ export function ModalManagementSlice({
             onClose={() => setShowStatusPillsConfig(false)}
             statusPillsConfig={statusPillsConfig}
             onSave={saveStatusPillsConfig}
+            entities={entities}
+            t={t}
+          />
+        </ModalSuspense>
+      )}
+
+      {showManagementConsole && (
+        <ModalSuspense>
+          <ManagementConsoleModal
+            show={showManagementConsole}
+            onClose={() => setShowManagementConsole(false)}
+            connected={connected}
+            activeUrl={activeUrl}
             entities={entities}
             t={t}
           />

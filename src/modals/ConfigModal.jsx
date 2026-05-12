@@ -107,6 +107,7 @@ export default function ConfigModal({
   callService,
   onClose,
   onFinishOnboarding,
+  onOpenManagementConsole,
   // Profiles & templates
   profiles,
 }) {
@@ -334,6 +335,23 @@ export default function ConfigModal({
         {t('system.runningVersion')}:{' '}
         <span className="text-[var(--text-primary)]">{runningVersion}</span>
       </div>
+
+      {/* Management Console button */}
+      {onOpenManagementConsole && (
+        <button
+          type="button"
+          onClick={() => { onOpenManagementConsole(); onClose(); }}
+          className="flex w-full items-center justify-between rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] px-4 py-3 text-left transition-colors hover:bg-[var(--glass-bg-hover)]"
+        >
+          <div className="flex items-center gap-3">
+            <Server className="h-5 w-5 text-[var(--text-secondary)]" />
+            <span className="text-sm font-bold text-[var(--text-primary)]">
+              {t('management.title') || 'Management Console'}
+            </span>
+          </div>
+          <ArrowRight className="h-4 w-4 text-[var(--text-muted)]" />
+        </button>
+      )}
 
       {/* Auth Method Toggle */}
       {renderAuthMethodToggle()}
@@ -1573,8 +1591,25 @@ export default function ConfigModal({
                 <span className="text-[11px] text-[var(--text-muted)] tabular-nums">
                   {cardBorderRadius}px
                 </span>
-                {cardBorderRadius !== 16 && <ResetButton onClick={() => setCardBorderRadius(16)} />}
+                {cardBorderRadius !== 24 && <ResetButton onClick={() => setCardBorderRadius(24)} />}
               </div>
+            </div>
+            <div className="mb-2 flex gap-1.5">
+              {[
+                { label: t('settings.radiusPreset.square') || 'Square', value: 0 },
+                { label: t('settings.radiusPreset.soft') || 'Soft', value: 16 },
+                { label: t('settings.radiusPreset.rounded') || 'Rounded', value: 24 },
+                { label: t('settings.radiusPreset.pill') || 'Pill', value: 48 },
+              ].map(({ label, value }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setCardBorderRadius(value)}
+                  className={`flex-1 rounded-full border px-2 py-1 text-[10px] font-bold tracking-wider uppercase transition-colors ${cardBorderRadius === value ? 'border-[var(--accent-color)] bg-[var(--accent-bg)] text-[var(--accent-color)]' : 'border-transparent bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:bg-[var(--glass-bg-hover)] hover:text-[var(--text-primary)]'}`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
             <M3Slider
               min={0}

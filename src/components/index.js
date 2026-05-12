@@ -22,6 +22,8 @@ export { default as TodoCard } from './cards/TodoCard';
 export { default as VacuumCard } from './cards/VacuumCard';
 export { default as MowerCard } from './cards/MowerCard';
 export { default as WeatherTempCard } from './cards/WeatherTempCard';
+export { default as SmartPlugCard } from './cards/SmartPlugCard';
+export { default as DoorbellCard } from './cards/DoorbellCard';
 
 // ── Charts ───────────────────────────────────────────────────────────────
 export { default as SparkLine } from './charts/SparkLine';

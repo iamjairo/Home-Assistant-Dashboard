@@ -329,7 +329,7 @@ export function useProfiles({ haUser, contextSetters, prefetchProfiles = true })
         gridColumns: 4,
         gridGapH: 20,
         gridGapV: 20,
-        cardBorderRadius: 16,
+        cardBorderRadius: 24,
         headerSettings: { showTitle: true, showClock: true, showDate: true },
         headerTitle: '',
         headerScale: 1,
