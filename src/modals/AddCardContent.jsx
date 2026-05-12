@@ -12,9 +12,11 @@ import {
   Home,
   Lightbulb,
   ListChecks,
+  Lock,
   Minus,
   Music,
   Speaker,
+  Sprout,
   Plus,
   Search,
   Shield,
@@ -335,7 +337,9 @@ function AddCardContent({
     return entityIds.filter((id) => {
       if (addCardTargetPage === 'header') return id.startsWith('person.') && !excludedHeader.has(id);
       if (addCardTargetPage === 'settings') return !excludedSettings.has(id);
+      if (addCardType === 'lock') return id.startsWith('lock.') && !excludedOnPage.has(id);
       if (addCardType === 'vacuum') return id.startsWith('vacuum.') && !excludedOnPage.has(id);
+      if (addCardType === 'mower') return id.startsWith('lawn_mower.') && !excludedOnPage.has(id);
       if (addCardType === 'fan') return id.startsWith('fan.') && !excludedOnPage.has(id);
       if (addCardType === 'camera') return id.startsWith('camera.');
       if (addCardType === 'cover') return id.startsWith('cover.');
@@ -354,7 +358,9 @@ function AddCardContent({
             id.startsWith('input_boolean.') ||
             id.startsWith('binary_sensor.') ||
             id.startsWith('switch.') ||
-            id.startsWith('automation.')) &&
+            id.startsWith('automation.') ||
+            id.startsWith('select.') ||
+            id.startsWith('input_select.')) &&
           !excludedOnPage.has(id)
         );
       }
@@ -877,7 +883,9 @@ function AddCardContent({
   const usesEntityMultiSelect = [
     'sensor',
     'light',
+    'lock',
     'vacuum',
+    'mower',
     'fan',
     'camera',
     'climate',
@@ -956,10 +964,24 @@ function AddCardContent({
                   onSelect={setAddCardType}
                 />
                 <TypeButton
+                  type="lock"
+                  icon={Lock}
+                  label={getLabel('addCard.type.lock', 'Lock')}
+                  isActive={addCardType === 'lock'}
+                  onSelect={setAddCardType}
+                />
+                <TypeButton
                   type="vacuum"
                   icon={Bot}
                   label={t('addCard.type.vacuum')}
                   isActive={addCardType === 'vacuum'}
+                  onSelect={setAddCardType}
+                />
+                <TypeButton
+                  type="mower"
+                  icon={Sprout}
+                  label={t('addCard.type.mower')}
+                  isActive={addCardType === 'mower'}
                   onSelect={setAddCardType}
                 />
                 <TypeButton

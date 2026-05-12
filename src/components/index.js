@@ -10,6 +10,7 @@ export { default as GenericEnergyCostCard } from './cards/GenericEnergyCostCard'
 export { default as GenericNordpoolCard } from './cards/GenericNordpoolCard';
 export { default as FanCard } from './cards/FanCard';
 export { default as LightCard } from './cards/LightCard';
+export { default as LockCard } from './cards/LockCard';
 export { default as MissingEntityCard } from './cards/MissingEntityCard';
 export { MediaPlayerCard, MediaGroupCard } from './cards/MediaCards';
 export { default as PersonStatus } from './cards/PersonStatus';
@@ -19,6 +20,7 @@ export { default as SpacerCard } from './cards/SpacerCard';
 export { default as StatusPill } from './cards/StatusPill';
 export { default as TodoCard } from './cards/TodoCard';
 export { default as VacuumCard } from './cards/VacuumCard';
+export { default as MowerCard } from './cards/MowerCard';
 export { default as WeatherTempCard } from './cards/WeatherTempCard';
 
 // ── Charts ───────────────────────────────────────────────────────────────
@@ -33,8 +35,3 @@ export { EmbyLogo, JellyfinLogo, NRKLogo, getServerInfo } from './ui/CustomIcons
 
 // ── Pages ────────────────────────────────────────────────────────────────
 export { default as PageNavigation } from './pages/PageNavigation';
-export { default as MediaPage } from './pages/MediaPage';
-export { default as SonosPage } from './pages/SonosPage';
-export { default as LightsPage } from './pages/LightsPage';
-export { default as BatteryPage } from './pages/BatteryPage';
-export { default as RoomExplorerPage } from './pages/RoomExplorerPage';

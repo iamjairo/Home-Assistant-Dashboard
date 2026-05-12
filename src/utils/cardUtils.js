@@ -13,7 +13,10 @@ import {
 const REMOVABLE_PREFIXES = [
   'light_',
   'light.',
+  'lock_card_',
+  'lock.',
   'vacuum.',
+  'lawn_mower.',
   'media_player.',
   'media_group_',
   'sonos_group_',
@@ -46,6 +49,7 @@ const SPECIAL_CARD_PREFIXES = [
   'nordpool_card_',
   'todo_card_',
   'room_card_',
+  'lock_card_',
   'cover_card_',
   'camera_card_',
   'alarm_card_',
@@ -103,7 +107,9 @@ export function isCardHiddenByLogic(
   const isSpecialCard = cardId === 'car' || SPECIAL_CARD_PREFIXES.some((p) => cardId.startsWith(p));
 
   if (!isSpecialCard && !entities[cardId]) {
-    if (cardId.startsWith('light_') || cardId.startsWith('light.')) return false;
+    if (cardId.startsWith('light_') || cardId.startsWith('light.') || cardId.startsWith('lock.')) {
+      return false;
+    }
     hiddenByBaseLogic = true;
   }
 
