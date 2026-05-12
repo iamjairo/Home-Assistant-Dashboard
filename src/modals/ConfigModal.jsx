@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import ModernDropdown from '../components/ui/ModernDropdown';
 import M3Slider from '../components/ui/M3Slider';
@@ -116,6 +116,13 @@ export default function ConfigModal({
   const [expandedNotes, setExpandedNotes] = useState({});
   const [failedImageMap, setFailedImageMap] = useState({});
   const [layoutPreview, setLayoutPreview] = useState(false);
+
+  const handleOpenManagementConsole = useCallback(() => {
+    if (onOpenManagementConsole) {
+      onOpenManagementConsole();
+      onClose();
+    }
+  }, [onOpenManagementConsole, onClose]);
   const [maxGridColumns, setMaxGridColumns] = useState(() => {
     if (globalThis.window === undefined) return MAX_GRID_COLUMNS;
     return getMaxGridColumnsForWidth(globalThis.window.innerWidth);
@@ -340,7 +347,7 @@ export default function ConfigModal({
       {onOpenManagementConsole && (
         <button
           type="button"
-          onClick={() => { onOpenManagementConsole(); onClose(); }}
+          onClick={handleOpenManagementConsole}
           className="flex w-full items-center justify-between rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] px-4 py-3 text-left transition-colors hover:bg-[var(--glass-bg-hover)]"
         >
           <div className="flex items-center gap-3">
