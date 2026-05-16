@@ -231,7 +231,7 @@ function DevicesTab({ entities, t }) {
 
 // ── Profiles Tab ─────────────────────────────────────────────────────────────
 
-function ProfilesTab({ profiles, activeProfileId: _activeProfileId, onSave, onLoad, t }) {
+function ProfilesTab({ profiles, onSave, onLoad, t }) {
   return (
     <div className="space-y-4">
       <SectionLabel>{t?.('management.profiles') || 'Profiles'}</SectionLabel>
@@ -273,12 +273,11 @@ function ProfilesTab({ profiles, activeProfileId: _activeProfileId, onSave, onLo
       {onSave && (
         <button
           type="button"
-          onClick={() => {
-            const fallbackName = `${t?.('management.profiles') || 'Profile'} ${new Date().toLocaleString()}`;
-            const name = globalThis.prompt?.(t?.('profiles.namePlaceholder') || 'Profile name', fallbackName);
-            if (!name?.trim()) return;
-            onSave(name.trim());
-          }}
+          onClick={() =>
+            onSave(
+              `${t?.('management.profiles') || 'Profile'} ${new Date().toISOString().replace('T', ' ').slice(0, 16)}`
+            )
+          }
           className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[var(--accent-color)] bg-[var(--accent-bg)] py-3 font-bold text-[var(--accent-color)] uppercase transition hover:opacity-90"
         >
           {t?.('profile.save') || 'Save current profile'}
@@ -301,7 +300,6 @@ export default function ManagementConsoleModal({
   activeUrl,
   entities,
   profiles,
-  activeProfileId,
   onSaveProfile,
   onLoadProfile,
   t,
@@ -374,7 +372,6 @@ export default function ManagementConsoleModal({
             {tab === 'profiles' && (
               <ProfilesTab
                 profiles={profiles}
-                activeProfileId={activeProfileId}
                 onSave={onSaveProfile}
                 onLoad={onLoadProfile}
                 t={t}

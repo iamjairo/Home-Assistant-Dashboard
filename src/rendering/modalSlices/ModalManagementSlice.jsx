@@ -318,7 +318,6 @@ export function ModalManagementSlice({
             activeUrl={activeUrl}
             entities={entities}
             profiles={savedProfiles}
-            activeProfileId={null}
             onSaveProfile={saveProfile}
             onLoadProfile={loadProfile}
             t={t}
