@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { BellRing, Bell, Camera } from '../../icons';
 import { getIconComponent } from '../../icons';
 
