@@ -39,11 +39,11 @@ const SmartPlugCard = memo(/** @param {any} props */ function SmartPlugCard({
   const powerValue = powerEntity
     ? parseFloat(powerEntity.state)
     : null;
-  const powerUnit = powerEntity?.attributes?.unit_of_measurement || 'W';
+  const powerUnit = powerEntity?.attributes?.unit_of_measurement ?? '';
   const energyValue = energyEntity
     ? parseFloat(energyEntity.state)
     : null;
-  const energyUnit = energyEntity?.attributes?.unit_of_measurement || 'kWh';
+  const energyUnit = energyEntity?.attributes?.unit_of_measurement ?? '';
 
   const handleToggle = useCallback(
     (e) => {
