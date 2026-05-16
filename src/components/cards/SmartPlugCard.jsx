@@ -15,7 +15,7 @@ const SmartPlugCard = memo(/** @param {any} props */ function SmartPlugCard({
   customIcons,
   callService,
   onOpen,
-  isMobile,
+  isMobile: _isMobile,
   t,
 }) {
   const settings = cardSettings[settingsKey] || cardSettings[cardId] || {};
