@@ -5,6 +5,7 @@ import M3Slider from '../components/ui/M3Slider';
 import AccessibleModalShell from '../components/ui/AccessibleModalShell';
 import { GRADIENT_PRESETS } from '../contexts/ConfigContext';
 import { hasOAuthTokens } from '../services/oauthStorage';
+import { getCardRadiusPresets } from '../utils/radiusPresets';
 import {
   getMaxGridColumnsForWidth,
   MAX_GRID_COLUMNS,
@@ -1602,12 +1603,7 @@ export default function ConfigModal({
               </div>
             </div>
             <div className="mb-2 flex gap-1.5">
-              {[
-                { label: t('settings.radiusPreset.square') || 'Square', value: 0 },
-                { label: t('settings.radiusPreset.soft') || 'Soft', value: 16 },
-                { label: t('settings.radiusPreset.rounded') || 'Rounded', value: 24 },
-                { label: t('settings.radiusPreset.pill') || 'Pill', value: 48 },
-              ].map(({ label, value }) => (
+              {getCardRadiusPresets(t).map(({ label, value }) => (
                 <button
                   key={value}
                   type="button"
@@ -2419,4 +2415,3 @@ ConfigModal.propTypes = {
   onFinishOnboarding: PropTypes.func,
   profiles: profilesShape,
 };
-
