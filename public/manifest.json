@@ -16,7 +16,7 @@
       "name": "Home",
       "short_name": "Home",
       "description": "Go to the home dashboard page",
-      "url": "/#home",
+      "url": "./#home",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     }
   ],
