@@ -128,6 +128,32 @@ describe('rendering registry dispatch', () => {
     expect(rendererMocks.renderLockCard).toHaveBeenCalledOnce();
   });
 
+  it('routes smart plug and doorbell prefixes to their renderers', () => {
+    const { dragProps, getControls, cardStyle, settingsKey, ctx } = base();
+
+    const smartPlugResult = dispatchCardRender(
+      'smart_plug_kitchen',
+      dragProps,
+      getControls,
+      cardStyle,
+      settingsKey,
+      ctx
+    );
+    const doorbellResult = dispatchCardRender(
+      'doorbell_card_front',
+      dragProps,
+      getControls,
+      cardStyle,
+      settingsKey,
+      ctx
+    );
+
+    expect(smartPlugResult).toEqual({ renderer: 'smart_plug' });
+    expect(doorbellResult).toEqual({ renderer: 'doorbell' });
+    expect(rendererMocks.renderSmartPlugCard).toHaveBeenCalledOnce();
+    expect(rendererMocks.renderDoorbellCard).toHaveBeenCalledOnce();
+  });
+
   it('routes composite lock cards to the lock renderer', () => {
     const { dragProps, getControls, cardStyle, settingsKey, ctx } = base();
 

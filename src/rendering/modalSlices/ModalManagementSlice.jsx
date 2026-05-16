@@ -14,6 +14,7 @@ const ManagementConsoleModal = lazy(() => import('../../modals/ManagementConsole
 
 export function ModalManagementSlice({
   core,
+  profiles = {},
   modals,
   pageManagement,
   addCard,
@@ -23,6 +24,7 @@ export function ModalManagementSlice({
   mediaTick,
 }) {
   const { entities, conn, t, connected, activeUrl } = core;
+  const { profiles: savedProfiles, saveProfile, loadProfile } = profiles;
   const {
     activeMediaModal,
     setActiveMediaModal,
@@ -315,6 +317,10 @@ export function ModalManagementSlice({
             connected={connected}
             activeUrl={activeUrl}
             entities={entities}
+            profiles={savedProfiles}
+            activeProfileId={null}
+            onSaveProfile={saveProfile}
+            onLoadProfile={loadProfile}
             t={t}
           />
         </ModalSuspense>

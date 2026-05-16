@@ -1,10 +1,7 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import {
   X,
   Server,
-  Wifi,
-  WifiOff,
-  RefreshCw,
   Activity,
   HardDrive,
   Shield,
@@ -234,7 +231,7 @@ function DevicesTab({ entities, t }) {
 
 // ── Profiles Tab ─────────────────────────────────────────────────────────────
 
-function ProfilesTab({ profiles, activeProfileId, onSave, onLoad, t }) {
+function ProfilesTab({ profiles, activeProfileId: _activeProfileId, onSave, onLoad, t }) {
   return (
     <div className="space-y-4">
       <SectionLabel>{t?.('management.profiles') || 'Profiles'}</SectionLabel>
@@ -254,7 +251,7 @@ function ProfilesTab({ profiles, activeProfileId, onSave, onLoad, t }) {
                 {onLoad && (
                   <button
                     type="button"
-                    onClick={() => onLoad(profile.id)}
+                    onClick={() => onLoad(profile)}
                     className="rounded-xl border border-[var(--accent-color)] bg-[var(--accent-bg)] px-3 py-1.5 text-[11px] font-bold text-[var(--accent-color)] uppercase transition hover:opacity-80"
                   >
                     {t?.('profile.load') || 'Load'}
@@ -276,7 +273,12 @@ function ProfilesTab({ profiles, activeProfileId, onSave, onLoad, t }) {
       {onSave && (
         <button
           type="button"
-          onClick={onSave}
+          onClick={() => {
+            const fallbackName = `${t?.('management.profiles') || 'Profile'} ${new Date().toLocaleString()}`;
+            const name = globalThis.prompt?.(t?.('profiles.namePlaceholder') || 'Profile name', fallbackName);
+            if (!name?.trim()) return;
+            onSave(name.trim());
+          }}
           className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[var(--accent-color)] bg-[var(--accent-bg)] py-3 font-bold text-[var(--accent-color)] uppercase transition hover:opacity-90"
         >
           {t?.('profile.save') || 'Save current profile'}

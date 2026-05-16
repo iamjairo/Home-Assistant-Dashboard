@@ -1,5 +1,5 @@
 import { SmartPlugCard } from '../../components';
-import { getSettings } from '../helpers';
+import { getSettings, renderMissingEntityWhenReady } from '../helpers';
 
 /**
  * @param {string} cardId
@@ -13,6 +13,19 @@ export function renderSmartPlugCard(cardId, dragProps, getControls, cardStyle, s
   const { entities, editMode, cardSettings, customNames, customIcons, callService, isMobile, t } =
     ctx;
   const settings = getSettings(cardSettings, settingsKey, cardId);
+  const plugEntityId = settings.plugId || cardId;
+  const entity = entities[plugEntityId];
+
+  if (!entity) {
+    return renderMissingEntityWhenReady(ctx, {
+      cardId,
+      dragProps,
+      controls: getControls(cardId),
+      cardStyle,
+      missingEntityId: plugEntityId,
+      t,
+    });
+  }
 
   return (
     <SmartPlugCard
@@ -29,7 +42,6 @@ export function renderSmartPlugCard(cardId, dragProps, getControls, cardStyle, s
       customIcons={customIcons}
       callService={callService}
       isMobile={isMobile}
-      settings={settings}
       t={t}
     />
   );
