@@ -1,4 +1,4 @@
-import { memo, useState, useCallback, useMemo, useRef } from 'react';
+import { memo, useState, useCallback, useMemo } from 'react';
 import { Camera, Maximize2, Minimize2, RefreshCw, Search, WifiOff } from '../../icons';
 
 /**
