@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Plus, LayoutGrid, Music, Speaker, Lightbulb, Battery, Home } from 'lucide-react';
+import { X, Plus, LayoutGrid, Music, Speaker, Lightbulb, Battery, Home, Camera } from 'lucide-react';
 import IconPicker from '../components/ui/IconPicker';
 import AccessibleModalShell from '../components/ui/AccessibleModalShell';
 
@@ -30,6 +30,7 @@ export default function AddPageModal({
   onCreateLights,
   onCreateBattery,
   onCreateRoomExplorer,
+  onCreateCameraWall,
 }) {
   const [activeTab, setActiveTab] = useState('standard');
   const modalTitleId = 'add-page-modal-title';
@@ -114,6 +115,13 @@ export default function AddPageModal({
               icon={Home}
               label={t('addCard.type.roomExplorer')}
               isActive={activeTab === 'roomExplorer'}
+              onSelect={setActiveTab}
+            />
+            <PageTypeButton
+              type="cameraWall"
+              icon={Camera}
+              label={t('addCard.type.cameraWall') || 'Cameras'}
+              isActive={activeTab === 'cameraWall'}
               onSelect={setActiveTab}
             />
           </div>
@@ -226,6 +234,21 @@ export default function AddPageModal({
               </div>
               <button
                 onClick={onCreateRoomExplorer}
+                className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[var(--accent-color)] bg-[var(--accent-bg)] py-4 font-bold tracking-widest text-[var(--accent-color)] uppercase transition-colors hover:opacity-90"
+              >
+                <Plus className="h-5 w-5" /> {t('page.create')}
+              </button>
+            </>
+          ) : activeTab === 'cameraWall' ? (
+            <>
+              <div className="popup-surface rounded-2xl p-4 text-sm text-[var(--text-secondary)]">
+                <p className="mb-2 text-[10px] font-bold tracking-widest text-[var(--text-muted)] uppercase">
+                  {t('addCard.type.cameraWall') || 'Camera Wall'}
+                </p>
+                <p className="leading-relaxed">{t('cameraWall.snapshotGridDescription') || 'View all your cameras at once with a searchable snapshot wall layout, fullscreen mode, and manual refresh.'}</p>
+              </div>
+              <button
+                onClick={onCreateCameraWall}
                 className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[var(--accent-color)] bg-[var(--accent-bg)] py-4 font-bold tracking-widest text-[var(--accent-color)] uppercase transition-colors hover:opacity-90"
               >
                 <Plus className="h-5 w-5" /> {t('page.create')}

@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import ModernDropdown from '../components/ui/ModernDropdown';
 import M3Slider from '../components/ui/M3Slider';
 import AccessibleModalShell from '../components/ui/AccessibleModalShell';
 import { GRADIENT_PRESETS } from '../contexts/ConfigContext';
 import { hasOAuthTokens } from '../services/oauthStorage';
+import { getCardRadiusPresets } from '../utils/radiusPresets';
 import {
   getMaxGridColumnsForWidth,
   MAX_GRID_COLUMNS,
@@ -107,6 +108,7 @@ export default function ConfigModal({
   callService,
   onClose,
   onFinishOnboarding,
+  onOpenManagementConsole,
   // Profiles & templates
   profiles,
 }) {
@@ -115,6 +117,13 @@ export default function ConfigModal({
   const [expandedNotes, setExpandedNotes] = useState({});
   const [failedImageMap, setFailedImageMap] = useState({});
   const [layoutPreview, setLayoutPreview] = useState(false);
+
+  const handleOpenManagementConsole = useCallback(() => {
+    if (onOpenManagementConsole) {
+      onOpenManagementConsole();
+      onClose();
+    }
+  }, [onOpenManagementConsole, onClose]);
   const [maxGridColumns, setMaxGridColumns] = useState(() => {
     if (globalThis.window === undefined) return MAX_GRID_COLUMNS;
     return getMaxGridColumnsForWidth(globalThis.window.innerWidth);
@@ -334,6 +343,23 @@ export default function ConfigModal({
         {t('system.runningVersion')}:{' '}
         <span className="text-[var(--text-primary)]">{runningVersion}</span>
       </div>
+
+      {/* Management Console button */}
+      {onOpenManagementConsole && (
+        <button
+          type="button"
+          onClick={handleOpenManagementConsole}
+          className="flex w-full items-center justify-between rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] px-4 py-3 text-left transition-colors hover:bg-[var(--glass-bg-hover)]"
+        >
+          <div className="flex items-center gap-3">
+            <Server className="h-5 w-5 text-[var(--text-secondary)]" />
+            <span className="text-sm font-bold text-[var(--text-primary)]">
+              {t('management.title') || 'Management Console'}
+            </span>
+          </div>
+          <ArrowRight className="h-4 w-4 text-[var(--text-muted)]" />
+        </button>
+      )}
 
       {/* Auth Method Toggle */}
       {renderAuthMethodToggle()}
@@ -1573,8 +1599,20 @@ export default function ConfigModal({
                 <span className="text-[11px] text-[var(--text-muted)] tabular-nums">
                   {cardBorderRadius}px
                 </span>
-                {cardBorderRadius !== 16 && <ResetButton onClick={() => setCardBorderRadius(16)} />}
+                {cardBorderRadius !== 24 && <ResetButton onClick={() => setCardBorderRadius(24)} />}
               </div>
+            </div>
+            <div className="mb-2 flex gap-1.5">
+              {getCardRadiusPresets(t).map(({ label, value }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setCardBorderRadius(value)}
+                  className={`flex-1 rounded-full border px-2 py-1 text-[10px] font-bold tracking-wider uppercase transition-colors ${cardBorderRadius === value ? 'border-[var(--accent-color)] bg-[var(--accent-bg)] text-[var(--accent-color)]' : 'border-transparent bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:bg-[var(--glass-bg-hover)] hover:text-[var(--text-primary)]'}`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
             <M3Slider
               min={0}
@@ -2377,4 +2415,3 @@ ConfigModal.propTypes = {
   onFinishOnboarding: PropTypes.func,
   profiles: profilesShape,
 };
-

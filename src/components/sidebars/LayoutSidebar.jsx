@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import M3Slider from '../ui/M3Slider';
+import { getCardRadiusPresets } from '../../utils/radiusPresets';
 import {
   getMaxGridColumnsForWidth,
   MAX_GRID_COLUMNS,
@@ -601,8 +602,20 @@ export default function LayoutSidebar({
                 >
                   {cardBorderRadius}px
                 </span>
-                {cardBorderRadius !== 16 && <ResetButton onClick={() => setCardBorderRadius(16)} />}
+                {cardBorderRadius !== 24 && <ResetButton onClick={() => setCardBorderRadius(24)} />}
               </div>
+            </div>
+            <div className="mb-2 flex gap-1.5">
+              {getCardRadiusPresets(t).map(({ label, value }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setCardBorderRadius(value)}
+                  className={`flex-1 rounded-full border px-2 py-1 text-[10px] font-bold tracking-wider uppercase transition-colors ${cardBorderRadius === value ? 'border-[var(--accent-color)] bg-[var(--accent-bg)] text-[var(--accent-color)]' : 'border-transparent bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:bg-[var(--glass-bg-hover)] hover:text-[var(--text-primary)]'}`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
             <M3Slider
               min={0}

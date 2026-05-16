@@ -37,6 +37,7 @@ const MODAL_DEFAULTS = {
   showHeaderEditModal: false,
   showEditCardModal: null,
   showStatusPillsConfig: false,
+  showManagementConsole: false,
 };
 
 // Keys checked by hasOpenModal
@@ -66,6 +67,7 @@ const OPEN_CHECK_KEYS = [
   'showAlarmModal',
   'showAlarmActionModal',
   'showStatusGroupModal',
+  'showManagementConsole',
 ];
 
 function buildModalActions(setModalValue, closeAllModals, hasOpenModal) {
@@ -113,6 +115,7 @@ function buildModalActions(setModalValue, closeAllModals, hasOpenModal) {
     setShowHeaderEditModal: setters.setShowHeaderEditModal,
     setShowEditCardModal: setters.setShowEditCardModal,
     setShowStatusPillsConfig: setters.setShowStatusPillsConfig,
+    setShowManagementConsole: setters.setShowManagementConsole,
   };
 
   return {

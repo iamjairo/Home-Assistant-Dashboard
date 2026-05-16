@@ -20,3 +20,5 @@ export { renderAlarmCard } from './alarmRenderer';
 export { renderRoomCard } from './roomRenderer';
 export { renderCameraCard } from './cameraRenderer';
 export { renderSpacerCard } from './spacerRenderer';
+export { renderSmartPlugCard } from './smartPlugRenderer';
+export { renderDoorbellCard } from './doorbellRenderer';

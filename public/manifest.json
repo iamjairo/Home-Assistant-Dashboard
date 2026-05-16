@@ -1,13 +1,25 @@
 {
   "name": "Tunet Dashboard",
   "short_name": "Tunet",
-  "description": "Home Assistant Dashboard",
+  "description": "A modern Home Assistant dashboard with real-time entity updates, customisable cards and glassmorphism UI.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0a0a0f",
   "theme_color": "#0a0a0f",
+  "categories": ["utilities", "productivity"],
+  "lang": "en",
+  "dir": "ltr",
+  "shortcuts": [
+    {
+      "name": "Home",
+      "short_name": "Home",
+      "description": "Go to the home dashboard page",
+      "url": "./#home",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
   "icons": [
     {
       "src": "favicon.svg",

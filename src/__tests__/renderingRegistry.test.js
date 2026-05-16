@@ -23,6 +23,8 @@ const rendererMocks = vi.hoisted(() => ({
   renderRoomCard: vi.fn(() => ({ renderer: 'room' })),
   renderCameraCard: vi.fn(() => ({ renderer: 'camera' })),
   renderSpacerCard: vi.fn(() => ({ renderer: 'spacer' })),
+  renderSmartPlugCard: vi.fn(() => ({ renderer: 'smart_plug' })),
+  renderDoorbellCard: vi.fn(() => ({ renderer: 'doorbell' })),
 }));
 
 vi.mock('../rendering/cards', () => rendererMocks);
@@ -124,6 +126,32 @@ describe('rendering registry dispatch', () => {
 
     expect(result).toEqual({ renderer: 'lock' });
     expect(rendererMocks.renderLockCard).toHaveBeenCalledOnce();
+  });
+
+  it('routes smart plug and doorbell prefixes to their renderers', () => {
+    const { dragProps, getControls, cardStyle, settingsKey, ctx } = base();
+
+    const smartPlugResult = dispatchCardRender(
+      'smart_plug_kitchen',
+      dragProps,
+      getControls,
+      cardStyle,
+      settingsKey,
+      ctx
+    );
+    const doorbellResult = dispatchCardRender(
+      'doorbell_card_front',
+      dragProps,
+      getControls,
+      cardStyle,
+      settingsKey,
+      ctx
+    );
+
+    expect(smartPlugResult).toEqual({ renderer: 'smart_plug' });
+    expect(doorbellResult).toEqual({ renderer: 'doorbell' });
+    expect(rendererMocks.renderSmartPlugCard).toHaveBeenCalledOnce();
+    expect(rendererMocks.renderDoorbellCard).toHaveBeenCalledOnce();
   });
 
   it('routes composite lock cards to the lock renderer', () => {

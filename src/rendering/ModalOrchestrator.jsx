@@ -198,6 +198,7 @@ export default function ModalOrchestrator({
 
       <ModalManagementSlice
         core={core}
+        profiles={profilesProps}
         modals={modals}
         pageManagement={pageManagement}
         addCard={addCard}

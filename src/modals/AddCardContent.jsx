@@ -1,5 +1,6 @@
 import {
   ArrowUpDown,
+  BellRing,
   Bot,
   Calendar,
   Camera,
@@ -15,6 +16,7 @@ import {
   Lock,
   Minus,
   Music,
+  Plug,
   Speaker,
   Sprout,
   Plus,
@@ -349,6 +351,8 @@ function AddCardContent({
       if (addCardType === 'cost') return id.startsWith('sensor.') || id.startsWith('input_number.');
       if (addCardType === 'media') return id.startsWith('media_player.');
       if (addCardType === 'sonos') return id.startsWith('media_player.') && isSonosMediaEntity(entities[id]);
+      if (addCardType === 'smartplug') return id.startsWith('switch.') || id.startsWith('input_boolean.');
+      if (addCardType === 'doorbell') return id.startsWith('binary_sensor.') || id.startsWith('button.');
       if (addCardType === 'sensor') {
         return (
           (id.startsWith('sensor.') ||
@@ -895,6 +899,8 @@ function AddCardContent({
     'sonos',
     'toggle',
     'entity',
+    'smartplug',
+    'doorbell',
   ].includes(addCardType);
   const usesMultiSelectWithCalendar = usesEntityMultiSelect || addCardType === 'calendar';
 
@@ -1094,6 +1100,20 @@ function AddCardContent({
                   icon={Minus}
                   label={getLabel('addCard.type.spacer', 'Spacer')}
                   isActive={addCardType === 'spacer'}
+                  onSelect={setAddCardType}
+                />
+                <TypeButton
+                  type="smartplug"
+                  icon={Plug}
+                  label={getLabel('addCard.type.smartplug', 'Smart Plug')}
+                  isActive={addCardType === 'smartplug'}
+                  onSelect={setAddCardType}
+                />
+                <TypeButton
+                  type="doorbell"
+                  icon={BellRing}
+                  label={getLabel('addCard.type.doorbell', 'Doorbell')}
+                  isActive={addCardType === 'doorbell'}
                   onSelect={setAddCardType}
                 />
               </div>

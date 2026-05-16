@@ -157,6 +157,15 @@ export function usePageManagement({
       defaultSlug: 'room_explorer',
     });
 
+  const createCameraWallPage = () =>
+    createTypedPage({
+      labelKey: 'addCard.type.cameraWall',
+      fallbackLabel: 'Cameras',
+      defaultIcon: 'Camera',
+      defaultType: 'camera_wall',
+      defaultSlug: 'camera_wall',
+    });
+
   // ── Delete a page ──────────────────────────────────────────────────────
   const deletePage = (pageId) => {
     if (!pageId || pageId === 'home') return;
@@ -202,6 +211,7 @@ export function usePageManagement({
     createLightsPage,
     createBatteryPage,
     createRoomExplorerPage,
+    createCameraWallPage,
     deletePage,
     removeCard,
   };
