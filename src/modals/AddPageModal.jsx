@@ -245,7 +245,7 @@ export default function AddPageModal({
                 <p className="mb-2 text-[10px] font-bold tracking-widest text-[var(--text-muted)] uppercase">
                   {t('addCard.type.cameraWall') || 'Camera Wall'}
                 </p>
-                <p className="leading-relaxed">{t('cameraWall.createDescription') || 'View all your cameras at once with a multi-camera wall layout, fullscreen mode, and motion detection.'}</p>
+                <p className="leading-relaxed">{t('cameraWall.snapshotGridDescription') || 'View all your cameras at once with a searchable snapshot wall layout, fullscreen mode, and manual refresh.'}</p>
               </div>
               <button
                 onClick={onCreateCameraWall}
