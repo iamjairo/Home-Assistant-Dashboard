@@ -219,6 +219,7 @@ export default function PageNavigation({
               key={page.id}
               draggable={editMode}
               onClick={() => (editMode ? setEditingPage(page.id) : setActivePage(page.id))}
+              data-active={activePage === page.id}
               onDragStart={(event) => {
                 if (!editMode) return;
                 event.dataTransfer.effectAllowed = 'move';
