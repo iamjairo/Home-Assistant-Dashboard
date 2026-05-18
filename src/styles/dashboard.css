@@ -332,6 +332,74 @@ html[data-theme='flat'] .popup-surface-hover {
   box-shadow: none !important;
 }
 
+/* ── MediaMTX Neon — cosmetic refinements scoped to mediamtxNeon theme ── */
+
+/* Selection */
+html[data-theme='mediamtxNeon'] ::selection {
+  background: rgba(34, 211, 238, 0.3);
+  color: #fff;
+}
+
+/* 1. Typography stack */
+html[data-theme='mediamtxNeon'] body,
+html[data-theme='mediamtxNeon'] {
+  font-family: var(--font-body);
+}
+html[data-theme='mediamtxNeon'] code,
+html[data-theme='mediamtxNeon'] pre,
+html[data-theme='mediamtxNeon'] .font-mono,
+html[data-theme='mediamtxNeon'] [class*='badge'],
+html[data-theme='mediamtxNeon'] [class*='entity-id'],
+html[data-theme='mediamtxNeon'] [class*='sensor-value'] {
+  font-family: var(--font-mono);
+}
+
+/* 2. Active page-nav item — left-border glow */
+html[data-theme='mediamtxNeon'] [data-active='true'] {
+  border-left: 3px solid #22d3ee !important;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.25);
+}
+
+/* 3. Status pills — mono, uppercase, tight */
+html[data-theme='mediamtxNeon'] .status-pill,
+html[data-theme='mediamtxNeon'] [class*='badge'] {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.6rem;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+/* 4. Card hover glow — cyan top border + layered shadow */
+html[data-theme='mediamtxNeon'] .touch-feedback:hover,
+html[data-theme='mediamtxNeon'] [class*='card']:hover {
+  border-top: 2px solid #22d3ee;
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.2), 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.15s ease, border-top 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* 5. Focus rings — expanded to all interactive elements */
+html[data-theme='mediamtxNeon'] button:focus-visible,
+html[data-theme='mediamtxNeon'] [role='button']:focus-visible,
+html[data-theme='mediamtxNeon'] a:focus-visible,
+html[data-theme='mediamtxNeon'] input:focus-visible,
+html[data-theme='mediamtxNeon'] select:focus-visible,
+html[data-theme='mediamtxNeon'] textarea:focus-visible,
+html[data-theme='mediamtxNeon'] [role='link']:focus-visible,
+html[data-theme='mediamtxNeon'] [role='menuitem']:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 3px;
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.35), inset 0 0 4px rgba(34, 211, 238, 0.1);
+}
+/* Input focus fallback for mouse users */
+html[data-theme='mediamtxNeon'] input:focus,
+html[data-theme='mediamtxNeon'] select:focus,
+html[data-theme='mediamtxNeon'] textarea:focus {
+  border-color: #22d3ee !important;
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.25);
+}
+
 /* ── Battery Bar (header topbar variant) ── */
 .battery-bar {
   position: relative;

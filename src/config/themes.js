@@ -1,4 +1,4 @@
-import { Moon, Sun, Sparkles } from 'lucide-react';
+import { Moon, Sun, Sparkles, Radio } from 'lucide-react';
 
 const STATUS_TOKENS_DARK = {
   '--status-success-fg': '#4ade80',
@@ -209,6 +209,44 @@ export const themes = {
       '--modal-surface-hover': 'rgba(255, 255, 255, 0.07)',
       '--modal-surface-shadow': 'none',
       '--modal-surface-shadow-hover': 'none',
+    },
+  },
+  mediamtxNeon: {
+    label: 'MediaMTX Neon',
+    icon: Radio,
+    colors: {
+      // Page surfaces — slate-900 base from mediamtx-ui variables.css
+      '--bg-primary': '#0f172a',
+      '--bg-secondary': '#1e293b',
+      '--bg-gradient-from': '#0f172a',
+      '--bg-gradient-to': '#020617',
+      // Text — slate-200/500 with muted slate
+      '--text-primary': '#e2e8f0',
+      '--text-secondary': '#94a3b8',
+      '--text-muted': '#64748b',
+      ...STATUS_TOKENS_DARK,
+      // Cards — translucent slate-800 with cyan-tinted borders
+      '--card-bg': 'rgba(30, 41, 59, 0.8)',
+      '--card-border': 'rgba(148, 163, 184, 0.1)',
+      '--glass-bg': 'rgba(30, 41, 59, 0.6)',
+      '--glass-bg-hover': 'rgba(34, 211, 238, 0.08)',
+      '--glass-border': 'rgba(148, 163, 184, 0.15)',
+      // Modals — dark slate with cyan-aware shadows
+      '--modal-bg': '#0f172a',
+      '--modal-backdrop': 'rgba(2, 6, 23, 0.85)',
+      '--modal-border': 'rgba(34, 211, 238, 0.15)',
+      '--modal-border-width': '1px',
+      '--modal-shadow': '0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 24px rgba(34, 211, 238, 0.08)',
+      '--modal-surface': 'rgba(30, 41, 59, 0.7)',
+      '--modal-surface-hover': 'rgba(34, 211, 238, 0.08)',
+      '--modal-surface-shadow': '0 4px 12px rgba(0, 0, 0, 0.3)',
+      '--modal-surface-shadow-hover': '0 8px 20px rgba(34, 211, 238, 0.12)',
+      // Accent — cyan-400 (mediamtx-ui's signature)
+      '--accent-color': '#22d3ee',
+      '--accent-bg': 'rgba(34, 211, 238, 0.12)',
+      // Typography — Lexend Deca body, SF Mono machine-text
+      '--font-body': "'Lexend Deca', system-ui, -apple-system, sans-serif",
+      '--font-mono': "'SF Mono', 'Fira Code', ui-monospace, monospace",
     },
   },
 };

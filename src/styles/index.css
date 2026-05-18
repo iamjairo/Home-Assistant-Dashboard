@@ -1,3 +1,5 @@
+/* Lexend Deca — loaded for mediamtxNeon theme; negligible overhead for other themes */
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&display=swap');
 @import 'tailwindcss';
 @import './animations.css';
 
