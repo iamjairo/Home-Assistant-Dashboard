@@ -41,6 +41,10 @@ export const ConfigProvider = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useState(() => {
     if (typeof globalThis.window !== 'undefined') {
       try {
+        // URL param wins over localStorage so embedders (e.g. iframe in
+        // mediamtx-ui) can pin a theme without touching the user's setting.
+        const fromUrl = new URLSearchParams(window.location.search).get('theme');
+        if (fromUrl && themes[fromUrl]) return fromUrl;
         const saved = localStorage.getItem('tunet_theme');
         return saved && themes[saved] ? saved : 'dark';
       } catch (error) {
